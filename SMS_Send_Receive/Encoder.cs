@@ -13,6 +13,7 @@ namespace SMS_Send_Receive
 {
     class Encoder
     {
+        //hanz manuel
         public static SerialPort serial = new SerialPort();
         static Timer tmrTimeout = new Timer();
         static int timerTimeout = 0;
@@ -73,7 +74,8 @@ namespace SMS_Send_Receive
             string a = await ExecuteATCommand("AT+CSQ");
             a = a.Replace(@"\r\n", @"\r");
             string[] b = a.Split('\r');
-            var c = from x in b where x.Contains("+CSQ:") select x;
+            //var c = from x in b where x.Contains("+CSQ:") select x;
+            var c = b.Where(x => x.Contains("+CSQ:")).FirstOrDefault();
             foreach(var s in c)
             {
                 string[] d = s.Split(':');
